@@ -6,8 +6,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator,
-  } from "@/components/ui/breadcrumb";
-import {X} from "lucide-react";  
+  } from "@/components/ui/breadcrumb"; ;  
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import  img1 from "../../public/images/examplecart1.webp";

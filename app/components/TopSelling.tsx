@@ -1,34 +1,23 @@
 "use client"
 
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+ 
 import Link from "next/link";
 import Image from "next/image";
 import img1 from "../../public/images/product-1.webp";
 import img2 from "../../public/images/product-3.webp";
 import img3 from "../../public/images/product-5.webp";
-import img4 from "../../public/images/product-6.webp";
-import img7 from "../../public/images/product-7.webp";
-import img8 from "../../public/images/product-8.webp";
+import img4 from "../../public/images/product-6.webp"; 
 import img5 from "../../public/images/examplecart1.webp";
 import img6 from "../../public/images/examplecart2.webp";
 import img9 from "../../public/images/pre-title.webp";
 import img10 from "../../public/images/side-1.webp";
-import {Heart,Eye,ShoppingCart,Star,Check} from "lucide-react";
-import { useState } from "react";
+import { Star } from "lucide-react"; 
 
 
 
 function HomePageProducts() {
 
-    let products2 = [
+    const products2 = [
         {
             id: 1,
             image: img1,
@@ -63,7 +52,7 @@ function HomePageProducts() {
             
           },
     ]
-  let products1 = [
+  const products1 = [
    
     {
       id: 4,

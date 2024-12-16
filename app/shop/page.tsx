@@ -18,9 +18,9 @@ import Footer from "../components/Footer";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+ 
   DialogHeader,
-  DialogTitle,
+ 
   DialogTrigger,
 } from "@/components/ui/dialog"
 import Link from "next/link";
@@ -39,7 +39,7 @@ import { useState } from "react";
 function page() {
 
     
-  let products = [
+  const products = [
     {
       id: 1,
       image: img1,
@@ -127,7 +127,7 @@ function page() {
   const [setWishShow, setIsWishShow] = useState(false);
   const [wishProductName, setWishProductName] = useState("");
 
-  const cartToggler = (productName:any) => {
+  const cartToggler = (productName:string) => {
     setAddedProductName(productName);
     setIsCartShow(!setCartShow);
     setTimeout(() => setIsCartShow(false), 3000);
@@ -135,7 +135,7 @@ function page() {
 
 
 
-  const wishToggler = (wishName:any) => {
+  const wishToggler = (wishName:string) => {
     setWishProductName(wishName);
     setIsWishShow(!setWishShow);
     setTimeout(() => setIsWishShow(false), 3000);

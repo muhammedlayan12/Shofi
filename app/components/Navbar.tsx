@@ -4,15 +4,8 @@
 "use client"
 
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { useState, useEffect } from "react";
+ 
+import { useState,  } from "react";
 import Image from "next/image";
 import { FaChevronDown, FaHeart, FaSearch, FaShoppingBag, FaUser } from "react-icons/fa";
 import logo from "../../public/images/logo.svg";
@@ -265,3 +258,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

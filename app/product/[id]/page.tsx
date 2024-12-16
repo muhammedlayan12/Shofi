@@ -10,9 +10,8 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator,
-  } from "@/components/ui/breadcrumb";
-import { useRouter } from "next/router";
-import {Github,Instagram,Linkedin,Facebook,Mail,MapPin,Check,Heart}  from "lucide-react";
+  } from "@/components/ui/breadcrumb"; 
+import {Github,Instagram,Linkedin,Facebook,Check,Heart}  from "lucide-react";
 import Image from "next/image";
 import img1 from "../../../public/images/product-1.webp";
 import img2 from "../../../public/images/product-3.webp";
@@ -127,7 +126,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
   const [setWishShow, setIsWishShow] = useState(false);
   const [wishProductName, setWishProductName] = useState("");
 
-  const cartToggler = (productName:any) => {
+  const cartToggler = (productName:string) => {
     setAddedProductName(productName);
     setIsCartShow(!setCartShow);
     setTimeout(() => setIsCartShow(false), 3000);
@@ -135,11 +134,11 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
 
 
 
-  const wishToggler = (wishName:any) => {
-    setWishProductName(wishName);
-    setIsWishShow(!setWishShow);
-    setTimeout(() => setIsWishShow(false), 3000);
-  }
+  // const wishToggler = (wishName:any) => {
+  //   setWishProductName(wishName);
+  //   setIsWishShow(!setWishShow);
+  //   setTimeout(() => setIsWishShow(false), 3000);
+  // }
   
   if (!product) {
     return <div>
