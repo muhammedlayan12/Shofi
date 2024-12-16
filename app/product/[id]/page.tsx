@@ -253,14 +253,3 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
