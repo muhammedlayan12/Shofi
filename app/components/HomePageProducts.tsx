@@ -279,12 +279,12 @@ import img7 from "../../public/images/product-7.webp";
 import img8 from "../../public/images/product-8.webp";
 import img5 from "../../public/images/examplecart1.webp";
 import img6 from "../../public/images/examplecart2.webp";
-import { Heart, Eye, ShoppingCart, Star, Check } from "lucide-react";
-import { useState } from "react";
+import { Heart, Eye, ShoppingCart, Star} from "lucide-react";
+
 
 function HomePageProducts() {
 
-  let products = [
+  const products = [
     {
       id: 1,
       image: img1,
@@ -367,22 +367,22 @@ function HomePageProducts() {
     }
   ];
   
-  const [setCartShow, setIsCartShow] = useState(false);
-  const [addedProductName, setAddedProductName] = useState("");
-  const [setWishShow, setIsWishShow] = useState(false);
-  const [wishProductName, setWishProductName] = useState("");
+  // const [setCartShow, setIsCartShow] = useState(false);
+  // const [addedProductName, setAddedProductName] = useState("");
+  // const [setWishShow, setIsWishShow] = useState(false);
+  // const [wishProductName, setWishProductName] = useState("");
 
-  const cartToggler = (productName: any) => {
-    setAddedProductName(productName);
-    setIsCartShow(!setCartShow);
-    setTimeout(() => setIsCartShow(false), 3000);
-  };
+  // const cartToggler = (productName: any) => {
+  //   setAddedProductName(productName);
+  //   setIsCartShow(!setCartShow);
+  //   setTimeout(() => setIsCartShow(false), 3000);
+  // };
 
-  const wishToggler = (wishName: any) => {
-    setWishProductName(wishName);
-    setIsWishShow(!setWishShow);
-    setTimeout(() => setIsWishShow(false), 3000);
-  };
+  // const wishToggler = (wishName: any) => {
+  //   setWishProductName(wishName);
+  //   setIsWishShow(!setWishShow);
+  //   setTimeout(() => setIsWishShow(false), 3000);
+  // };
   
   return (
     <div>
@@ -410,12 +410,12 @@ function HomePageProducts() {
                 <ShoppingCart
                   className="py-2 px-2 rounded-full transition-all duration-500 hover:bg-greenHover"
                   size={40}
-                  onClickCapture={() => cartToggler(product.name)}
+                  
                 />
                 <Heart
                   className="py-2 px-2 bg-white rounded-full transition-all duration-500 hover:bg-greenHover"
                   size={40}
-                  onClick={() => wishToggler(product.name)}
+                  
                 />
                 <Dialog>
                   <DialogTrigger> 
@@ -433,11 +433,11 @@ function HomePageProducts() {
                 </Dialog>
               </div>
               <div className="relative">
-                <Image
+                <Link href={`/product/${product.id}`}><Image
                   className="w-full h-full object-cover"
                   src={product.image}
                   alt={product.alt}
-                />
+                /></Link>
               </div>
               <div className="flex justify-between px-3 py-4">
                 <div className="flex gap-2">
