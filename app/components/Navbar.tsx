@@ -59,14 +59,14 @@ function Navbar() {
             className="relative"
           >
             <Link href="/shop" className="items-center flex">
-              Shop <FaChevronDown className="ml-1 text-xs" />
+              Shop {/*<FaChevronDown className="ml-1 text-xs" />*/}
             </Link>
-            {hoveredMenu === "shop" && (
+            {/* {hoveredMenu === "shop" && (
               <div className="absolute flex flex-col pr-24 top-full left-0 bg-white text-black p-4 gap-4 shadow-lg">
                 <Link href="/cart" className="block">Cart</Link>
                 <Link href="/wishlist" className="block">Wishlist</Link>
               </div>
-            )}
+            )} */}
           </li>
           <li
             onMouseEnter={() => setHoveredMenu("pages")}
@@ -78,11 +78,10 @@ function Navbar() {
             </Link>
             {hoveredMenu === "pages" && (
               <div className="absolute flex flex-col pr-24 top-full left-0 bg-white text-black p-4 gap-4 shadow-lg">
-             <Link href="/about" className="block">Cart</Link>
-             <Link href="/login" className="block">Login</Link>
-             <Link href="/register" className="block">Register</Link>
-             <Link href="/profile" className="block">Profile</Link>
+             <Link href="/cart" className="block">Cart</Link>
+             <Link href="/wishlist" className="block">Wishlist</Link>
              <Link href="/checkout" className="block">Checkout</Link>
+             <Link href="/About" className="block">About</Link>
               </div>
             )}
           </li>
