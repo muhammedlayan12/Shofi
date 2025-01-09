@@ -159,19 +159,7 @@ function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-
-                <div
-                  onClick={() => setClickedMenu(clickedMenu === "shop" ? null : "shop")}
-                  className="items-center flex gap-[10%] cursor-pointer"
-                >
-                 <Link href="/shop"> Shop</Link> <FaChevronDown className="font-light ml-1 text-sm" />
-                </div>
-                {clickedMenu === "shop" && (
-                  <ul className="ml-4 mt-2 py-4 px-6  flex flex-col gap-4">
-                    <li><Link href="/cart">Cart</Link></li>
-                    <li><Link href="/wishlist">Wishlist</Link></li>
-                  </ul>
-                )}
+              <Link href="/shop">Shop</Link>
    
             </li>
             <li>
@@ -179,15 +167,13 @@ function Navbar() {
                 onClick={() => setClickedMenu(clickedMenu === "pages" ? null : "pages")}
                 className="items-center flex gap-[10%] cursor-pointer"
               >
-                <Link href="/about">Pages</Link> <FaChevronDown className="font-light ml-1 text-lg" />
+                <Link href="">Pages</Link> <FaChevronDown className="font-light ml-1 text-lg" />
               </div>
               {clickedMenu === "pages" && (
                 <ul className="ml-4 flex flex-col gap-4 mt-2">
                   <li><Link href="/about">About Us</Link></li>
                   <li><Link href="/cart">Cart</Link></li>
-                  <li><Link href="/login">Login</Link></li>
-                  <li><Link href="/register">Register</Link></li>
-                  <li><Link href="/profile">Profile</Link></li>
+                  <li><Link href="/wishlist">Wishlist</Link></li>
                   <li><Link href="/checkot">Checkout</Link></li>
                 </ul>
               )}

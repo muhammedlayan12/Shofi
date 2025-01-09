@@ -279,7 +279,7 @@ import img7 from "../../public/images/product-7.webp";
 import img8 from "../../public/images/product-8.webp";
 import img5 from "../../public/images/examplecart1.webp";
 import img6 from "../../public/images/examplecart2.webp";
-import { Heart, Eye, ShoppingCart, Star} from "lucide-react";
+import { Heart, Eye, ShoppingCart} from "lucide-react";
 
 
 function HomePageProducts() {
@@ -439,17 +439,17 @@ function HomePageProducts() {
                   alt={product.alt}
                 /></Link>
               </div>
-              <div className="flex justify-between px-3 py-4">
-                <div className="flex gap-2">
-                  <Star size={25} color="#ffd700" />
-                  <Star size={25} color="#ffd700" />
-                  <Star size={25} color="#ffd700" />
-                  <Star size={25} color="#ffd700" />
-                </div>
-                <span className="line-through">{product.originalPrice}</span>
-              </div>
-              <div className="flex justify-between px-3 py-4">
-                <p className="font-semibold">{product.price}</p>
+              <div className="flex flex-col gap-0">
+                <p className="text-[#838383] text-md">{product.name}</p>
+                <p className="text-xl transition-all duration-500 hover:text-greenBase">
+                  {product.description}
+                </p>
+                <p className="text-lg font-[500]">
+                  {product.price}{" "}
+                  <span className="text-[#838383] text-sm line-through">
+                    {product.originalPrice}
+                  </span>
+                </p>
               </div>
             </div>
           ))}
