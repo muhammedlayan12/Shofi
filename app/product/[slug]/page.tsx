@@ -18,7 +18,8 @@
 // import { client } from "@/sanity/lib/client";
 // import { urlFor } from "@/sanity/lib/image";
 // import { Check,Instagram,Github,Linkedin,Facebook} from "lucide-react";
-// import React, { useState } from "react";
+// import { useState } from "react";
+// import { useParams } from "next/navigation";
  
 // type ProductData = {
 //   image: string;
@@ -29,6 +30,7 @@
 //   stock:string;
 //   orignalPrice: number;
 //   slug: string;
+//   id:number;
 // };
 
 
@@ -38,18 +40,23 @@
  
   
 
-// async function DynamicRouting({params}:{params:any}) {
+// async function DetailPage() {
+  
 
-
-//     const [isCartShow, setIsCartShow] = React.useState(false);
-//     const [addedProductName, setAddedProductName] = React.useState("");
+//     const [isCartShow, setIsCartShow] = useState(false);
+//     const [addedProductName, setAddedProductName] = useState("");
 //     // const [isWishShow, setIsWishShow] = useState(false);
 //     // const [wishProductName, setWishProductName] = useState("");
-   
+
+
+//     const params = useParams();
+
+
 //     const query = `
 //     *[_type == "product"] | order(__updatedAt asc){
-//   image,name,title,price,orignalPrice,description,stock,
-//     "slug":Slug.current
+//   image,id,name,title,price,orignalPrice,description,stock,
+//    "slug":slug.current
+    
 // }
 //   `;
 
@@ -64,6 +71,7 @@
  
 //   const products: ProductData[] = await client.fetch(query);
 //   const product = products.find((product) => product.slug === params.slug);
+ 
 
 //   return (
 //    <div>
@@ -93,7 +101,7 @@
 //      </div>
 
 
-//      <div className="flex sm:justify-evenly justify-center md:text-start text-center md:flex-row flex-col items-center">
+//      <div key={product.id} className="flex sm:justify-evenly justify-center md:text-start text-center md:flex-row flex-col items-center">
 //         <Image src={urlFor(product.image).url()} width={500} height={500} alt={product.name} className="xl:w-[30%]"/>
 //         <div className="flex flex-col gap-2 px-2">
 //             <span className="text-[#737373] text-[1em]">{product.name}</span>
@@ -138,16 +146,195 @@
 //   )
 // }
 
-// export default DynamicRouting;
+// export default DetailPage;
 
 
 
-import React from 'react'
+// // import React from 'react'
 
-function page() {
+// // function page() {
+// //   return (
+// //     <div>Dynamic Routing Soon</div>
+// //   )
+// // }
+
+// // export default page
+
+
+
+
+
+
+
+"use client"
+
+
+
+
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import Image from "next/image";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { Check, Instagram, Github, Linkedin, Facebook } from "lucide-react";
+
+type ProductData = {
+  image: string;
+  name: string;
+  title: string;
+  price: number;
+  description: string;
+  stock: string;
+  orignalPrice: number;
+  slug: string;
+  id: number;
+};
+
+function DetailPage() {
+  const [isCartShow, setIsCartShow] = useState(false);
+  const [addedProductName, setAddedProductName] = useState("");
+  const [product, setProduct] = useState<ProductData | null>(null);
+  const params = useParams();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const query = `
+        *[_type == "product"] | order(__updatedAt asc) {
+          image, id, name, title, price, orignalPrice, description, stock,
+          "slug": slug.current
+        }
+      `;
+
+      try {
+        const products: ProductData[] = await client.fetch(query);
+        const selectedProduct = products.find(
+          (product) => product.slug === params.slug
+        );
+        setProduct(selectedProduct || null);
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+      }
+    };
+
+    fetchProduct();
+  }, [params.slug]);
+
+  const cartToggler = (productName: string) => {
+    setAddedProductName(productName);
+    setIsCartShow(!isCartShow);
+    setTimeout(() => setIsCartShow(false), 3000);
+  };
+
   return (
-    <div>Dynamic Routing Soon</div>
-  )
+    <div>
+      <Navbar />
+      {product && (
+        <div>
+          <div className="mt-28 py-6 px-4 bg-[#ecffec]">
+            <div className="sm:ml-[12%] ml-0">
+              <h1 className="text-[2em] font-[500]">{product.name}</h1>
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="/">Shop</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{product.name}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+          </div>
+
+          <div
+            key={product.id}
+            className="flex sm:justify-evenly justify-center md:text-start text-center md:flex-row flex-col items-center"
+          >
+            <Image
+              src={urlFor(product.image).url()}
+              width={500}
+              height={500}
+              alt={product.name}
+              className="xl:w-[30%]"
+            />
+            <div className="flex flex-col gap-2 px-2">
+              <span className="text-[#737373] text-[1em]">{product.name}</span>
+              <h1 className="sm:text-[2.1em] text-[1.5em] font-[500]">
+                {product.title}
+              </h1>
+              <div
+                className={`${
+                  product.stock === "In Stock"
+                    ? "text-green-700"
+                    : "text-red-600"
+                } flex gap-3 text-[1em]`}
+              >
+                {product.stock}
+              </div>
+              <p className="md:text-[1em] text-[0.9em] lg:w-[400px] sm:w-[300px] w-[80%] text-[#737373]">
+                {product.description}
+              </p>
+              <div className="flex gap-6 items-end">
+                <h2 className="sm:text-3xl text-2xl font-[500] ">
+                  {`$${product.price}.00`}
+                </h2>
+                <span className="sm:text-xl text-sm line-through text-[#838383]">
+                  {`$${product.orignalPrice}.00`}
+                </span>
+              </div>
+
+              <p className="text-[1.1em]">Quantity</p>
+              <div className="flex sm:flex-row flex-col gap-10">
+                <div className="flex gap-5">
+                  <span className="text-[1.5em] cursor-pointer">-</span>
+                  <span className="text-[1.5em]">1</span>
+                  <span className="text-[1.5em] cursor-pointer">+</span>
+                </div>
+                <button
+                  onClick={() => cartToggler(product.name)}
+                  className="py-2 px-12 text-[1em] bg-greenBase text-white"
+                >
+                  Add To Cart
+                </button>
+              </div>
+              <div className="flex gap-5">
+                <Linkedin size={30} className="py-2 px-2 bg-greenBase text-white" />
+                <Instagram size={30} className="py-2 px-2 bg-greenBase text-white" />
+                <Facebook size={30} className="py-2 px-2 bg-greenBase text-white" />
+                <Github size={30} className="py-2 px-2 bg-greenBase text-white" />
+              </div>
+              <div
+                className={`${
+                  isCartShow ? "translate-y-2" : "translate-y-[-200%]"
+                } fixed py-[0.5vmin] px-4 rounded-xl`}
+              >
+                <Check size={35} className="text-white py-[0.35vmin]" />
+                <p className="sm:text-lg text-sm">
+                  {`${addedProductName} Added To Cart`}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      <Footer />
+    </div>
+  );
 }
 
-export default page
+export default DetailPage;

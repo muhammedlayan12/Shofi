@@ -4,5 +4,6 @@ type productData = {
     originalPrice: number;
     image: string;
     title: string;
+    id:number;
     slug: string;
 };

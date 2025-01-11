@@ -61,7 +61,7 @@
            
 // <div
 //               className="cursor-pointer overflow-hidden relative group"
-//               key={data.slug}
+//               key={data.id}
 //             >
 //               <div className="flex flex-col gap-3 absolute top-6 left-2 z-50 transition-all duration-500 opacity-0 transform -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
 //               <ShoppingCart
@@ -90,7 +90,7 @@
 //                       <div className="flex flex-col gap-3">
 //                         <p className="text-[#838383] text-md">{data.name}</p>
 //                         <p className="sm:text-3xl text-2xl font-semibold transition-all cursor-pointer duration-500 hover:text-greenBase">
-//                           {data.slug}
+//                           {data.id}
 //                         </p>
 //                         <div className="flex gap-4 items-center">
 //                           <span className="text-greenBase">In Stock</span>
@@ -100,11 +100,11 @@
 //                           <Star size={15} className="border text-yellow-400"/>
 //                           <span>(0) Reviews</span>
 //                         </div>
-//                         <p className="text-[#838383] sm:text-sm text-xs">{data.slug}</p>
+//                         <p className="text-[#838383] sm:text-sm text-xs">{data.id}</p>
 //                         <p className="sm:text-2xl text-xl font-[500]">
 //                           {data.price}{" "}
 //                           <span className="text-[#838383] sm:text-lg text-sm line-through">
-//                             {data.slug}
+//                             {data.id}
 //                           </span>
 //                         </p>
 //                         <div className="flex gap-8">
@@ -117,7 +117,7 @@
 //                 </Dialog>
 //               </div>
 
-//             <Link href={`/product/${data.slug}`}>
+//             <Link href={`/product/${data.id}`}>
 //             <Image
 //                 src={urlFor(data.image).url()}   width={300} height={300}
 //                 width={200} height={200}
@@ -128,12 +128,12 @@
 //               <div className="flex flex-col gap-0">
 //                 <p className="text-[#838383] text-md">{data.name}</p>
 //                 <p className="text-xl transition-all duration-500 hover:text-greenBase">
-//                   {data.slug}
+//                   {data.id}
 //                 </p>
 //                 <p className="text-lg font-[500]">
 //                   {data.price}{" "}
 //                   <span className="text-[#838383] text-sm line-through">
-//                     {data.slug}
+//                     {data.id}
 //                   </span>
 //                 </p>
 //               </div>
@@ -203,8 +203,8 @@ type ProductData = {
 async function fetchProducts(): Promise<ProductData[]> {
   const query = `
     *[_type == "product"] | order(__updatedAt asc){
-  image,name,title,price,orignalPrice,description,stock,
-    "slug":Slug.current
+  image,id,name,title,price,orignalPrice,description,stock,
+    "slug":slug.current
 }
   `;
   return client.fetch(query);
@@ -411,7 +411,7 @@ export default Practice;
 //           {datas.map((data) => (
 //             <div
 //               className="cursor-pointer overflow-hidden relative group"
-//               key={data.slug}
+//               key={data.id}
 //             >
 //               <div className="flex flex-col gap-3 absolute top-6 left-2 z-50 transition-all duration-500 opacity-0 transform -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
 //                 <ShoppingCart
@@ -437,7 +437,7 @@ export default Practice;
 //                       <div className="flex flex-col gap-3">
 //                         <p className="text-[#838383] text-md">{data.name}</p>
 //                         <p className="sm:text-3xl text-2xl font-semibold transition-all cursor-pointer duration-500 hover:text-greenBase">
-//                           {data.slug}
+//                           {data.id}
 //                         </p>
 //                         <div className="flex gap-4 items-center">
 //                           <span className="text-greenBase">In Stock</span>
@@ -447,7 +447,7 @@ export default Practice;
 //                           <Star size={15} className="border text-yellow-400" />
 //                           <span>(0) Reviews</span>
 //                         </div>
-//                         <p className="text-[#838383] sm:text-sm text-xs">{data.slug}</p>
+//                         <p className="text-[#838383] sm:text-sm text-xs">{data.id}</p>
 //                         <p className="sm:text-2xl text-xl font-[500]">
 //                           {data.price}{" "}
 //                           <span className="text-[#838383] sm:text-lg text-sm line-through">
@@ -472,19 +472,19 @@ export default Practice;
 //                   </DialogContent>
 //                 </Dialog>
 //               </div>
-//               <Link href={`/product/${data.slug}`}>
+//               <Link href={`/product/${data.id}`}>
 //                 <Image
 //                   src={urlFor(data.image).url()}   width={300} height={300}
 //                   width={300}
 //                   height={300}
-//                   alt={data.slug}
+//                   alt={data.id}
 //                   className="transition-all duration-1000 hover:transform hover:scale-75"
 //                 />
 //               </Link>
 //               <div className="flex flex-col gap-0">
 //                 <p className="text-[#838383] text-md">{data.name}</p>
 //                 <p className="text-xl transition-all duration-500 hover:text-greenBase">
-//                   {data.slug}
+//                   {data.id}
 //                 </p>
 //                 <p className="text-lg font-[500]">
 //                   {data.price}{" "}
