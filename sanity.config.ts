@@ -32,30 +32,30 @@
 
 
 
-// 'use client'
+'use client'
 
-// import {visionTool} from '@sanity/vision';
-// import {defineConfig} from 'sanity';
-// import {structureTool} from 'sanity/structure';
+import {visionTool} from '@sanity/vision';
+import {defineConfig} from 'sanity';
+import {structureTool} from 'sanity/structure';
 
-// import {schema} from './sanity/schemaTypes/';
-// import {structure} from './sanity/structure';
+import {schema} from './sanity/schemaTypes/';
+import {structure} from './sanity/structure';
 
-// // Directly use environment variables with fallback
-// const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'lc1sx5h6';
-// const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
-// const apiVersion = '2023-01-01'; // Replace with your API version
+// Directly use environment variables with fallback
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'lc1sx5h6';
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+const apiVersion = '2023-01-01'; // Replace with your API version
 
-// export default defineConfig({
-//   basePath: '/studio',
-//   projectId,    
-//   dataset,
-//   schema,
-//   plugins: [
-//     structureTool({structure}),
-//     visionTool({defaultApiVersion: apiVersion}),
-//   ],
-// });
+export default defineConfig({
+  basePath: '/studio',
+  projectId,    
+  dataset,
+  schema,
+  plugins: [
+    structureTool({structure}),
+    visionTool({defaultApiVersion: apiVersion}),
+  ],
+});
 
 
 
@@ -99,27 +99,27 @@
 
 
 
-'use client'
+// 'use client'
 
-import {visionTool} from '@sanity/vision';
-import {defineConfig} from 'sanity';
-import {structureTool} from 'sanity/structure';
+// import {visionTool} from '@sanity/vision';
+// import {defineConfig} from 'sanity';
+// import {structureTool} from 'sanity/structure';
 
-import {schema} from './sanity/schemaTypes/';
-import {structure} from './sanity/structure';
+// import {schema} from './sanity/schemaTypes/';
+// import {structure} from './sanity/structure';
 
-// Directly use environment variables with fallback
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID = 'lc1sx5h6';
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET = 'production';
-const apiVersion = '2023-01-01'; // Replace with your API version
+// // Directly use environment variables with fallback
+// const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID = 'lc1sx5h6';
+// const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET = 'production';
+// const apiVersion = '2023-01-01'; // Replace with your API version
 
-export default defineConfig({
-  basePath: '/studio',
-  projectId,    
-  dataset,
-  schema,
-  plugins: [
-    structureTool({structure}),
-    visionTool({defaultApiVersion: apiVersion}),
-  ],
-});
+// export default defineConfig({
+//   basePath: '/studio',
+//   projectId,    
+//   dataset,
+//   schema,
+//   plugins: [
+//     structureTool({structure}),
+//     visionTool({defaultApiVersion: apiVersion}),
+//   ],
+// });
