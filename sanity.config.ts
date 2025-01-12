@@ -38,7 +38,7 @@ import {visionTool} from '@sanity/vision';
 import {defineConfig} from 'sanity';
 import {structureTool} from 'sanity/structure';
 
-import {schema} from './sanity/schemaTypes';
+import {schema} from './sanity/schemaTypes/';
 import {structure} from './sanity/structure';
 
 // Directly use environment variables with fallback
