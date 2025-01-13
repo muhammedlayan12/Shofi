@@ -290,7 +290,7 @@ onClickCapture={() => cartToggler(data.name)}
                         {data.title}
                       </p>
                       <div className="flex gap-4 items-center">
-                        <span className="text-greenBase">{data.stock}</span>
+                        <span className={`${data.stock === "In Stock" ? "text-green-600" : "text-red-600"}`}>{data.stock}</span>
                         <Star size={15} className="border text-yellow-400"/>
                         <Star size={15} className="border text-yellow-400"/>
                         <Star size={15} className="border text-yellow-400"/>
@@ -334,20 +334,27 @@ onClickCapture={() => cartToggler(data.name)}
                 </span>
               </p>
             </div>
-            <div className={`${isCartShow ? "translate-y-2" : "translate-y-[-200%]"} xl:w-[25%] lg:w-[35%] md:w-[50%] sm:w-[60%] w-[100%] mx-2 z-50 transition-all duration-500 flex gap-5 bg-white fixed py-[0.5vmin] px-4 m-auto rounded-xl md:right-[40%] md:left-[40%] sm:right-[20%] sm:left-[20%] items-center top-2 justify-center`}>
-              <Check size={35} className="text-white py-[0.35vmin] rounded-full px-2 bg-green-500"/>
-              <p className="sm:text-lg text-sm">{`${addedProductName} Added To Cart`}</p>
-              
-            </div>
-            <div className={`${isWishShow ? "translate-y-2" : "translate-y-[-200%]"} xl:w-[25%] lg:w-[35%] md:w-[50%] sm:w-[60%] w-[100%] mx-2 z-50 transition-all duration-500 flex gap-5 bg-white fixed py-[0.5vmin] px-4 m-auto rounded-xl md:right-[40%] md:left-[40%] sm:right-[20%] sm:left-[20%] items-center top-2 justify-center`}>
-              <Heart size={35} className="text-white py-[0.35vmin] rounded-full px-2 bg-red-500"/>
-              <p className="sm:text-lg text-sm">{`${wishProductName} Added To Wish List`}</p>
-              
-            </div>
+            <div
+  className={`${
+    isCartShow ? "translate-y-0 opacity-100" : "translate-y-[-100%] opacity-0"
+  } fixed flex items-center top-[12%] sm:w-[300px] w-[70%] left-1/2 transform -translate-x-1/2 py-2 justify-center px-2 rounded-xl bg-white text-black shadow-md transition-all duration-500 ease-in-out`}
+>
+  <Check size={35} className="text-white mr-3 py-2 px-2 rounded-full bg-green-500"/>
+  <p className="sm:text-lg text-sm">{`${addedProductName} Added To Cart`}</p>
+</div>
+<div
+  className={`${
+    isWishShow ? "translate-y-0 opacity-100" : "translate-y-[-100%] opacity-0"
+  } fixed flex items-center top-[12%] sm:w-[300px] w-[70%] left-1/2 transform -translate-x-1/2 py-2 justify-center px-2 rounded-xl bg-white text-black shadow-md transition-all duration-500 ease-in-out`}
+>
+  <Heart size={35} className="text-white mr-3 py-2 px-2 rounded-full bg-red-500"/>
+  <p className="sm:text-lg text-sm">{`${addedProductName} Added To Wishlist`}</p>
+</div>
           </div>
           ))}
         </div>
       </div>
+      f
       <Footer />
     </div>
   );
