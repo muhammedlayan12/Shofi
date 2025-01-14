@@ -111,5 +111,6 @@
 ::-webkit-scrollbar-thumb:hover {
   
   background-color: var(--greenBase);
+  /* background-color: #dedede; */
   
 }

@@ -1,164 +1,8 @@
-// "use client" 
-
-
-
-// import {
-//   Breadcrumb,
-//   BreadcrumbItem,
-//   BreadcrumbLink,
-//   BreadcrumbList,
-//   BreadcrumbPage,
-//   BreadcrumbSeparator,
-// } from "@/components/ui/breadcrumb";
-// import Navbar from "../../components/Navbar";
-// import Footer from "../../components/Footer";
- 
- 
-// import Image from "next/image";
-// import { client } from "@/sanity/lib/client";
-// import { urlFor } from "@/sanity/lib/image";
-// import { Check,Instagram,Github,Linkedin,Facebook} from "lucide-react";
-// import { useState } from "react";
-// import { useParams } from "next/navigation";
- 
-// type ProductData = {
-//   image: string;
-//   name: string;
-//   title: string;
-//   price: number;
-//   description:string;
-//   stock:string;
-//   orignalPrice: number;
-//   slug: string;
-//   id:number;
-// };
-
-
-
- 
-
- 
-  
-
-// async function DetailPage() {
-  
-
-//     const [isCartShow, setIsCartShow] = useState(false);
-//     const [addedProductName, setAddedProductName] = useState("");
-//     // const [isWishShow, setIsWishShow] = useState(false);
-//     // const [wishProductName, setWishProductName] = useState("");
-
-
-//     const params = useParams();
-
-
-//     const query = `
-//     *[_type == "product"] | order(__updatedAt asc){
-//   image,id,name,title,price,orignalPrice,description,stock,
-//    "slug":slug.current
-    
-// }
-//   `;
-
-//   const cartToggler = (productName: string) => {
-//     setAddedProductName(productName);
-//     setIsCartShow(!isCartShow);
-//     setTimeout(() => setIsCartShow(false), 3000);
-//   };
-
- 
-//   console.log(query)
- 
-//   const products: ProductData[] = await client.fetch(query);
-//   const product = products.find((product) => product.slug === params.slug);
- 
-
-//   return (
-//    <div>
-//      <Navbar></Navbar>
-//      {
-//      product &&(
-//         <div>
-//             <div className="mt-28 py-6 px-4 bg-[#ecffec]">
-//        <div className="sm:ml-[12%] ml-0">
-//        <h1 className="text-[2em] font-[500]">{product.name}</h1>
-//      <Breadcrumb>
-//   <BreadcrumbList>
-//     <BreadcrumbItem>
-//       <BreadcrumbLink href="/">Home</BreadcrumbLink>
-//     </BreadcrumbItem>
-//     <BreadcrumbSeparator />
-//     <BreadcrumbItem>
-//       <BreadcrumbLink href="/">Shop</BreadcrumbLink>
-//     </BreadcrumbItem>
-//     <BreadcrumbSeparator />
-//     <BreadcrumbItem>
-//       <BreadcrumbPage>{product.name}</BreadcrumbPage>
-//     </BreadcrumbItem>
-//   </BreadcrumbList>
-// </Breadcrumb>
-//        </div>
-//      </div>
-
-
-//      <div key={product.id} className="flex sm:justify-evenly justify-center md:text-start text-center md:flex-row flex-col items-center">
-//         <Image src={urlFor(product.image).url()} width={500} height={500} alt={product.name} className="xl:w-[30%]"/>
-//         <div className="flex flex-col gap-2 px-2">
-//             <span className="text-[#737373] text-[1em]">{product.name}</span>
-//             <h1 className="sm:text-[2.1em] text-[1.5em] font-[500]">{product.title}</h1>
-//             <div className={`${product.stock === "In Stock" ? "text-green-700" : "text-red-600" } flex gap-3 text-[1em] text-center md:text-start md:m-0 m-auto`}>{product.stock}</div>
-//             <p className="md:text-[1em] text-[0.9em] lg:w-[400px] sm:w-[300px] w-[80%] justify-center flex m-auto text-[#737373]">{product.description}</p>
-//             <div className="flex gap-6 items-end md:m-0 m-auto">
-                
-//             <h2 className="sm:text-3xl text-2xl font-[500] ">{`$${product.price}.00`}</h2>
-//             <span className="sm:text-xl text-sm line-through text-[#838383]">{`$${product.orignalPrice}.00`}</span>
-//             </div>
-
-//             <p className="text-[1.1em]">Quantity</p>
-//             <div className="flex sm:flex-row flex-col gap-10 md:m-0 m-auto">
-//               <div className="flex gap-5 md:m-0 m-auto">
-//                 <span className="text-[1.5em] transition-all duration-500 hover:text-greenBase cursor-pointer">-</span>
-//                 <span className="text-[1.5em] transition-all duration-500 hover:text-greenBase cursor-pointer">1</span>
-//                 <span className="text-[1.5em] transition-all duration-500 hover:text-greenBase cursor-pointer">+</span>
-//               </div>
-//               <button  onClick={() => cartToggler(product.name)} className="py-2 px-12 text-[1em] bg-greenBase transition-all duration-500 hover:bg-[#010f1c] text-white">Add To Cart</button> 
-//             </div>
-//             <div className="flex gap-5 md:m-0 my-10 m-auto">
-//         <Linkedin size={30} className="py-2 px-2 bg-greenBase rounded-full transition-all duration-500 hover:bg-[#010f1c] text-white "/>
-//         <Instagram  size={30}className="py-2 px-2 bg-greenBase rounded-full transition-all duration-500 hover:bg-[#010f1c] text-white "/>
-//         <Facebook size={30} className="py-2 px-2 bg-greenBase rounded-full transition-all duration-500 hover:bg-[#010f1c] text-white "/>
-//         <Github size={30} className="py-2 px-2 bg-greenBase rounded-full transition-all duration-500 hover:bg-[#010f1c] text-white "/>
-//       </div>
-//       <div className={`${isCartShow ? "translate-y-2" : "translate-y-[-200%]"} xl:w-[25%] lg:w-[35%] md:w-[50%] sm:w-[60%] w-[100%] mx-2 z-50 transition-all duration-500 flex gap-5 bg-white fixed py-[0.5vmin] px-4 m-auto rounded-xl md:right-[40%] md:left-[40%] sm:right-[20%] sm:left-[20%] items-center top-2 justify-center`}>
-//                 <Check size={35} className="text-white py-[0.35vmin] rounded-full px-2 bg-green-500"/>
-//                 <p className="sm:text-lg text-sm">{`${addedProductName} Added To Cart`}</p>
-                
-//               </div>
-               
-//         </div>
-//      </div>
-//         </div>
-//      )
-// }
-//      <Footer></Footer>
-
-//    </div>
-//   )
-// }
 
 // export default DetailPage;
 
 
 
-// // import React from 'react'
-
-// // function page() {
-// //   return (
-// //     <div>Dynamic Routing Soon</div>
-// //   )
-// // }
-
-// // export default page
 
 
 
@@ -189,15 +33,13 @@ import { urlFor } from "@/sanity/lib/image";
 import { Check, Instagram, Github, Linkedin, Facebook,X } from "lucide-react";
 
 type ProductData = {
-  image: string;
-  name: string;
+  image: any;
   title: string;
+  category:string;
   price: number;
-  description: string;
-  stock: string;
-  orignalPrice: number;
-  slug: string;
-  id: number;
+  id:number;
+  description:string;
+  discountedPrice: number;
 };
 
 function DetailPage() {
@@ -205,10 +47,7 @@ function DetailPage() {
   const [isLimitShow, setIsLimitShow] = useState(false);
   const [addedProductName, setAddedProductName] = useState("");
   const [product, setProduct] = useState<ProductData | null>(null);
-  const [isQuantity, setIsQuantity] = useState(() => {
-    const storedQuantity = localStorage.getItem("quantity");
-    return storedQuantity ? parseInt(storedQuantity, 10) : 0;
-  });
+  const [isQuantity, setIsQuantity] = useState(0);
   const params = useParams();
 
 
@@ -217,7 +56,7 @@ function DetailPage() {
    if(isQuantity <= 9){
     const newQuantity = isQuantity + 1;
     setIsQuantity(newQuantity);
-    localStorage.setItem("quantity", newQuantity.toString());
+ 
    }
   };
 
@@ -230,34 +69,37 @@ function DetailPage() {
 if(isQuantity > 0){
   const newQuantity = isQuantity - 1;
   setIsQuantity(newQuantity);
-  localStorage.setItem("quantity", newQuantity.toString());
+ 
 }
   };
-  
-
-  useEffect(() => {
+   
+useEffect(() => {
     const fetchProduct = async () => {
       const query = `
-        *[_type == "product"] | order(__updatedAt asc) {
-          image, id, name, title, price, orignalPrice, description, stock,
-          "slug": slug.current
-        }
+        *[_type=="productsData"]{
+  image,description,title,id,discountedPrice,price,category
+}
       `;
-
+  
       try {
         const products: ProductData[] = await client.fetch(query);
+  
+        // Ensure `params.id` is a string for comparison
+        const productId = Array.isArray(params.id) ? params.id[0] : params.id;
+  
         const selectedProduct = products.find(
-          (product) => product.slug === params.slug
+          (product) => String(product.id) === productId
         );
+  
         setProduct(selectedProduct || null);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
     };
-
+  
     fetchProduct();
-  }, [params.slug]);
-
+  }, [params.id]);
+  
   const cartToggler = (productName: string) => {
     setAddedProductName(productName);
     setIsCartShow(!isCartShow);
@@ -304,7 +146,7 @@ if(isQuantity > 0){
         <div>
           <div className="mt-28 py-6 px-4 bg-[#ecffec]">
             <div className="sm:ml-[12%] ml-0">
-              <h1 className="text-[2em] font-[500]">{product.name}</h1>
+              <h1 className="text-[2em] font-[500]">{product.title}</h1>
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem>
@@ -316,7 +158,7 @@ if(isQuantity > 0){
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
-                    <BreadcrumbPage>{product.name}</BreadcrumbPage>
+                    <BreadcrumbPage>{product.title}</BreadcrumbPage>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
@@ -332,15 +174,15 @@ if(isQuantity > 0){
               src={urlFor(product.image).url()}
               width={500}
               height={500}
-              alt={product.name}
+              alt={product.title}
               className="xl:w-[30%]"
           />
             <div className="flex     flex-col gap-2 px-2">
-              <span className="text-[#737373] text-[1em]">{product.name}</span>
+              <span className="text-[#737373] text-[1em]">{product.title}</span>
               <h1 className="sm:text-[2.1em] text-[1.5em] font-[500]">
                 {product.title}
               </h1>
-              <div
+              {/* <div
                 className={`${
                   product.stock === "In Stock"
                     ? "text-green-700"
@@ -348,16 +190,16 @@ if(isQuantity > 0){
                 } flex gap-3 justify-center md:justify-start text-[1em] text-center`}
               >
                 <p>{product.stock}</p>
-              </div>
+              </div> */}
               <p className="md:text-[1em]  text-[0.9em] lg:w-[450px] sm:w-[370px]  w-[90%] text-[#737373]">
                 {product.description}
               </p>
               <div className="flex justify-center md:justify-start gap-6 items-end">
                 <h2 className="sm:text-3xl text-2xl font-[500] ">
-                  {`$${product.price}.00`}
+                  {`$${product.price.toFixed(2)}`}
                 </h2>
                 <span className="sm:text-xl text-sm line-through text-[#838383]">
-                  {`$${product.orignalPrice}.00`}
+                  {`$${product.discountedPrice.toFixed(2)}`}
                 </span>
               </div>
 
@@ -365,11 +207,11 @@ if(isQuantity > 0){
               <div className="flex justify-center md:justify-start sm:flex-row flex-col gap-10">
                 <div className="flex gap-5 justify-center">
                   <span className="text-[1.5em] cursor-pointer" onClick={decreaseQuantity}>-</span>
-                  <span className="text-[1.5em]">{localStorage.getItem("quantity")}</span>
+                  <span className="text-[1.5em]">{isQuantity}</span>
                   <span className="text-[1.5em] cursor-pointer" onClick={increaseQuantity} onClickCapture={limitToggler}>+</span>
                 </div>
                 <button
-                  onClick={() => cartToggler(product.name)}
+                  onClick={() => cartToggler(product.title)}
                   className="py-2 rounded-full px-12 text-[1em] bg-greenBase text-white"
                   
                 >
@@ -396,7 +238,7 @@ if(isQuantity > 0){
 <div
   className={`${
     isCartShow ? "translate-y-0 opacity-100" : "translate-y-[-100%] opacity-0"
-  } fixed flex items-center top-[12%] sm:w-[300px] w-[70%] left-1/2 transform -translate-x-1/2 py-2 justify-center px-2 rounded-xl bg-white text-black shadow-md transition-all duration-500 ease-in-out`}
+  } fixed flex items-center top-[12%] sm:w-[300px] w-[70%] left-1/2 transform -translate-x-1/2 py-2 justify-center px-2 rounded-xl bg-white text-black shadow-md transition-all duration-200 ease-in-out`}
 >
   <Check size={35} className="text-white mr-3 py-2 px-2 rounded-full bg-green-500"/>
   <p className="sm:text-lg text-sm">{`${addedProductName} Added To Cart`}</p>
@@ -405,7 +247,7 @@ if(isQuantity > 0){
 <div
   className={`${
     isLimitShow ? "translate-y-0 opacity-100" : "translate-y-[-100%] opacity-0"
-  } fixed flex items-center top-[12%] sm:w-[220px] w-[70%] left-1/2 transform -translate-x-1/2 py-2 justify-center px-2 rounded-xl bg-white text-black shadow-md transition-all duration-500 ease-in-out`}
+  } fixed flex items-center top-[12%] sm:w-[220px] w-[70%] left-1/2 transform -translate-x-1/2 py-2 justify-center px-2 rounded-xl bg-white text-black shadow-md transition-all duration-200 ease-in-out`}
 >
   <X size={35} className="text-white mr-3 py-2 px-2 rounded-full bg-red-500"/>
   <p className="sm:text-lg text-sm">{`Reach Limit Max`}</p>

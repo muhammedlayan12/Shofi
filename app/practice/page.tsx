@@ -354,7 +354,7 @@ onClickCapture={() => cartToggler(data.name)}
           ))}
         </div>
       </div>
-      f
+    
       <Footer />
     </div>
   );
