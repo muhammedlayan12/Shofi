@@ -84,7 +84,8 @@ useEffect(() => {
       try {
         const products: ProductData[] = await client.fetch(query);
   
-        // Ensure `params.id` is a string for comparison
+      
+        
         const productId = Array.isArray(params.id) ? params.id[0] : params.id;
   
         const selectedProduct = products.find(
@@ -107,7 +108,7 @@ useEffect(() => {
   };
 
   const limitToggler = ( ) => {
-    if(isQuantity > 9){
+    if(isQuantity > 4){
       setIsLimitShow(!isLimitShow);
     }
     else{
