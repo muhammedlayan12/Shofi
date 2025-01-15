@@ -53,7 +53,7 @@ function DetailPage() {
 
  
   const increaseQuantity = () => {
-   if(isQuantity <= 9){
+   if(isQuantity <= 5){
     const newQuantity = isQuantity + 1;
     setIsQuantity(newQuantity);
  
