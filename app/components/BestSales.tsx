@@ -493,7 +493,7 @@ async function fetchProducts(): Promise<ProductData[]> {
   const query = `
    *[_type=="productsData"]{
   image,description,title,id,discountedPrice,price,category
-}[0..2]
+}[6..8]
   `;
   return client.fetch(query);
 }
