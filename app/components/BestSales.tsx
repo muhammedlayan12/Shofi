@@ -31,7 +31,7 @@
 //       name: "Walnut",
 //       description: "Ergonomic Linen Pants",
 //       price: "$25.00",
-//       discountedPrice: "$54.00",
+//       oldPrice: "$54.00",
 //       review:
 //         "I purchased these walnuts and was amazed by their quality. They are fresh, crunchy, and packed with flavor. Perfect for baking or just snacking. The packaging is great and keeps the nuts fresh for a long time. Delivery was prompt, and customer service was very responsive. These walnuts are a must-have for anyone looking for premium quality nuts. Highly recommended for their freshness and taste.",
 //     },
@@ -42,7 +42,7 @@
 //       name: "Cauliflower",
 //       description: "Eat Fresh & Stay Fresh",
 //       price: "$30.00",
-//       discountedPrice: "$55.00",
+//       oldPrice: "$55.00",
 //       review:
 //         "This cauliflower was exceptionally fresh and had a vibrant, healthy look. It cooked perfectly and retained its crunch and flavor. Ideal for soups, curries, or even roasting. The size was generous, and it arrived without any blemishes. This is my go-to choice for fresh produce now. Definitely worth the price and a healthier alternative to frozen options. Highly impressed with the quality!",
 //     },
@@ -53,7 +53,7 @@
 //       name: "Hot Chocolate",
 //       description: "Chocolate Protein Booster",
 //       price: "$20.00",
-//       discountedPrice: "$50.00",
+//       oldPrice: "$50.00",
 //       review:
 //         "This hot chocolate mix is a treat for chocolate lovers! The flavor is rich and creamy, making every sip a delight. It dissolves quickly and evenly in milk or water. Perfect for cold winter nights or a quick comfort drink. The packaging is convenient and keeps the mix fresh for multiple uses. Excellent value for money, and it's a hit with both kids and adults. I can't recommend this enough!",
 //     },
@@ -102,12 +102,12 @@
 //                 <ShoppingCart
 //                   className="py-2 px-2 rounded-full transition-all duration-500 hover:bg-greenHover"
 //                   size={40}
-//                   onClickCapture={() => cartToggler(product.title)}
+//                   onClickCapture={() => cartToggler(product.name)}
 //                 />
 //                 <Heart
 //                   className="py-2 px-2 bg-white rounded-full transition-all duration-500 hover:bg-greenHover"
 //                   size={40}
-//                   onClick={() => wishToggler(product.title)}
+//                   onClick={() => wishToggler(product.name)}
 //                 />
 //                 <Dialog>
 //                   <DialogTrigger>
@@ -120,7 +120,7 @@
 //                     <DialogHeader className="flex justify-center gap-8 py-6 px-6">
 //                       <Image src={urlFor(product.image).url()} width={350} height={350} alt="products img" />
 //                       <div className="flex flex-col gap-3">
-//                         <p className="text-[#838383] text-md">{product.title}</p>
+//                         <p className="text-[#838383] text-md">{product.name}</p>
 //                         <p className="sm:text-3xl text-2xl font-semibold transition-all cursor-pointer duration-500 hover:text-greenBase">
 //                           {product.description}
 //                         </p>
@@ -150,7 +150,7 @@
 //                         <p className="sm:text-2xl text-xl font-[500]">
 //                           {product.price}{" "}
 //                           <span className="text-[#838383] sm:text-lg text-sm line-through">
-//                             {product.discountedPrice}
+//                             {product.oldPrice}
 //                           </span>
 //                         </p>
 //                         <div className="flex gap-8">
@@ -165,7 +165,7 @@
 //                           </div>
 //                           <button
 //                             className="py-3 sm:px-10 px-5 sm:text-lg text-xs text-white bg-[#010f1c] transition-all duration-500 hover:bg-greenHover"
-//                             onClick={() => cartToggler(product.title)}
+//                             onClick={() => cartToggler(product.name)}
 //                           >
 //                             Add To Cart
 //                           </button>
@@ -181,14 +181,14 @@
 //                 className="transition-all duration-1000 hover:transform hover:scale-75 xs:w-[80%] w-[95%]"
 //               />
 //               <div className="flex flex-col gap-0">
-//                 <p className="text-[#838383] text-md">{product.title}</p>
+//                 <p className="text-[#838383] text-md">{product.name}</p>
 //                 <p className="text-xl transition-all duration-500 hover:text-greenBase">
 //                   {product.description}
 //                 </p>
 //                 <p className="text-lg font-[500]">
 //                   {product.price}{" "}
 //                   <span className="text-[#838383] text-sm line-through">
-//                     {product.discountedPrice}
+//                     {product.oldPrice}
 //                   </span>
 //                 </p>
 //               </div>
@@ -260,7 +260,7 @@
 //       name: "Walnut",
 //       description: "Ergonomic Linen Pants",
 //       price: "$25.00",
-//       discountedPrice: "$54.00",
+//       oldPrice: "$54.00",
 //       review:
 //         "I purchased these walnuts and was amazed by their quality. They are fresh, crunchy, and packed with flavor. Perfect for baking or just snacking. The packaging is great and keeps the nuts fresh for a long time. Delivery was prompt, and customer service was very responsive. These walnuts are a must-have for anyone looking for premium quality nuts. Highly recommended for their freshness and taste.",
 //     },
@@ -271,7 +271,7 @@
 //       name: "Cauliflower",
 //       description: "Eat Fresh & Stay Fresh",
 //       price: "$30.00",
-//       discountedPrice: "$55.00",
+//       oldPrice: "$55.00",
 //       review:
 //         "This cauliflower was exceptionally fresh and had a vibrant, healthy look. It cooked perfectly and retained its crunch and flavor. Ideal for soups, curries, or even roasting. The size was generous, and it arrived without any blemishes. This is my go-to choice for fresh produce now. Definitely worth the price and a healthier alternative to frozen options. Highly impressed with the quality!",
 //     },
@@ -282,7 +282,7 @@
 //       name: "Hot Chocolate",
 //       description: "Chocolate Protein Booster",
 //       price: "$20.00",
-//       discountedPrice: "$50.00",
+//       oldPrice: "$50.00",
 //       review:
 //         "This hot chocolate mix is a treat for chocolate lovers! The flavor is rich and creamy, making every sip a delight. It dissolves quickly and evenly in milk or water. Perfect for cold winter nights or a quick comfort drink. The packaging is convenient and keeps the mix fresh for multiple uses. Excellent value for money, and it's a hit with both kids and adults. I can't recommend this enough!",
 //     },
@@ -331,12 +331,12 @@
 //                 <ShoppingCart
 //                   className="py-2 px-2 rounded-full transition-all duration-500 hover:bg-greenHover"
 //                   size={40}
-//                   onClickCapture={() => cartToggler(product.title)}
+//                   onClickCapture={() => cartToggler(product.name)}
 //                 />
 //                 <Heart
 //                   className="py-2 px-2 bg-white rounded-full transition-all duration-500 hover:bg-greenHover"
 //                   size={40}
-//                   onClick={() => wishToggler(product.title)}
+//                   onClick={() => wishToggler(product.name)}
 //                 />
 //                 <Dialog>
 //                   <DialogTrigger>
@@ -349,7 +349,7 @@
 //                     <DialogHeader className="flex justify-center gap-8 py-6 px-6">
 //                       <Image src={urlFor(product.image).url()} width={350} height={350} alt="products img" />
 //                       <div className="flex flex-col gap-3">
-//                         <p className="text-[#838383] text-md">{product.title}</p>
+//                         <p className="text-[#838383] text-md">{product.name}</p>
 //                         <p className="sm:text-3xl text-2xl font-semibold transition-all cursor-pointer duration-500 hover:text-greenBase">
 //                           {product.description}
 //                         </p>
@@ -379,7 +379,7 @@
 //                         <p className="sm:text-2xl text-xl font-[500]">
 //                           {product.price}{" "}
 //                           <span className="text-[#838383] sm:text-lg text-sm line-through">
-//                             {product.discountedPrice}
+//                             {product.oldPrice}
 //                           </span>
 //                         </p>
 //                         <div className="flex gap-8">
@@ -394,7 +394,7 @@
 //                           </div>
 //                           <button
 //                             className="py-3 sm:px-10 px-5 sm:text-lg text-xs text-white bg-[#010f1c] transition-all duration-500 hover:bg-greenHover"
-//                             onClick={() => cartToggler(product.title)}
+//                             onClick={() => cartToggler(product.name)}
 //                           >
 //                             Add To Cart
 //                           </button>
@@ -410,14 +410,14 @@
 //                 className="transition-all duration-1000 hover:transform hover:scale-75 xs:w-[80%] w-[95%]"
 //               />
 //               <div className="flex flex-col gap-0">
-//                 <p className="text-[#838383] text-md">{product.title}</p>
+//                 <p className="text-[#838383] text-md">{product.name}</p>
 //                 <p className="text-xl transition-all duration-500 hover:text-greenBase">
 //                   {product.description}
 //                 </p>
 //                 <p className="text-lg font-[500]">
 //                   {product.price}{" "}
 //                   <span className="text-[#838383] text-sm line-through">
-//                     {product.discountedPrice}
+//                     {product.oldPrice}
 //                   </span>
 //                 </p>
 //               </div>
@@ -479,24 +479,8 @@ import img10 from "../../public/images/best-banner-1.jpg";
 import { Heart, Eye, ShoppingCart, Star,Check} from "lucide-react";
 import { useState, useEffect } from "react";
  
-type ProductData = {
-  image: string;
-  title: string;
-  category:string;
-  price: number;
-  id:number;
-  description:string;
-  discountedPrice: number;
-};
 
-async function fetchProducts(): Promise<ProductData[]> {
-  const query = `
-   *[_type=="productsData"]{
-  image,description,title,id,discountedPrice,price,category
-}[6..8]
-  `;
-  return client.fetch(query);
-}
+
 
 function Shop() {
   const [datas, setDatas] = useState<ProductData[]>([]);
@@ -505,10 +489,31 @@ function Shop() {
   const [isWishShow, setIsWishShow] = useState(false);
   const [wishProductName, setWishProductName] = useState("");
  
-  useEffect(() => {
-    fetchProducts().then(setDatas).catch(console.error);
-  }, []);
-
+  type ProductData = {
+    image: string;
+    title: string;
+    category:string;
+    price: number;
+    id:number;
+    description:string;
+    oldPrice: number;
+  };
+  useEffect(()=>{
+    async function getData(){
+      try{
+        const query = `*[_type=="productsData"]{
+          id,name,image,price,oldPrice,description,rating,stockStatus
+        }`;
+        const data = await client.fetch(query);
+        const dataFilter =  data.slice(5,8);
+        console.log(dataFilter);
+        setDatas(dataFilter);
+      } catch(error){
+        console.error(error);
+      }
+    }
+    getData();
+  },[datas])
   const cartToggler = (productName: string) => {
     setAddedProductName(productName);
     setIsCartShow(!isCartShow);
@@ -543,12 +548,12 @@ function Shop() {
               <ShoppingCart
                 className="py-2 px-2 rounded-full transition-all duration-500 hover:bg-greenHover"
                 size={40}
-                onClickCapture={() => cartToggler(product.title)}
+                onClickCapture={() => cartToggler(product.name)}
               />
               <Heart
                 className="py-2 px-2 bg-white rounded-full transition-all duration-500 hover:bg-greenHover"
                 size={40}
-                onClick={() => wishToggler(product.title)}
+                onClick={() => wishToggler(product.name)}
               />
               <Dialog>
                 <DialogTrigger>
@@ -561,9 +566,9 @@ function Shop() {
                   <DialogHeader className="flex justify-center gap-8 py-6 px-6">
                     <Image src={urlFor(product.image).url()} width={350} height={350} alt="products img" />
                     <div className="flex flex-col gap-3">
-                      <p className="text-[#838383] text-md">{product.category}</p>
+                      <p className="text-[#838383] text-md">{product.name}</p>
                       <p className="sm:text-3xl text-2xl font-semibold transition-all cursor-pointer duration-500 hover:text-greenBase">
-                        {product.title}
+                        {product.name}
                       </p>
                       <div className="flex gap-4 items-center">
                         <span className="text-greenBase">In Stock</span>
@@ -589,9 +594,9 @@ function Shop() {
                         {product.description}
                       </p>
                       <p className="sm:text-2xl text-xl font-[500]">
-                        {`$${product.price.toFixed(2)}`}{" "}
+                        {`$${product.price}`}{" "}
                         <span className="text-[#838383] sm:text-lg text-sm line-through">
-                          {`$${product.discountedPrice.toFixed(2)}`}
+                          {`$${product.oldPrice}`}
                         </span>
                       </p>
                       <div className="flex gap-8">
@@ -606,7 +611,7 @@ function Shop() {
                         </div>
                         <button
                           className="py-3 sm:px-10 px-5 sm:text-lg text-xs text-white bg-[#010f1c] transition-all duration-500 hover:bg-greenHover"
-                          onClick={() => cartToggler(product.title)}
+                          onClick={() => cartToggler(product.name)}
                         >
                           Add To Cart
                         </button>
@@ -619,18 +624,18 @@ function Shop() {
             <Link href={`/products/${product.id}`}>
             <Image
               src={urlFor(product.image).url()} width={350} height={350}
-              alt={product.title}
+              alt={product.name}
               className="transition-all duration-1000 hover:transform hover:scale-75 xs:w-[80%] w-[95%]"
             /></Link>
             <div className="flex flex-col gap-0">
-              <p className="text-[#838383] text-md">{product.category}</p>
+              <p className="text-[#838383] text-md">{product.name}</p>
               <p className="text-xl transition-all duration-500 hover:text-greenBase">
-                {product.title}
+                {product.name}
               </p>
               <p className="text-lg font-[500]">
-                {`$${product.price.toFixed(2)}`}{" "}
+                {`$${product.price}`}{" "}
                 <span className="text-[#838383] text-sm line-through">
-                  {`$${product.discountedPrice.toFixed(2)}`}
+                  {`$${product.oldPrice}`}
                 </span>
               </p>
             </div>

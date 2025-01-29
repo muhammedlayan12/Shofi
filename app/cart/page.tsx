@@ -21,9 +21,9 @@ function Cart() {
        <div className="sm:ml-[12%] ml-0">
        <h1 className="text-[2em] font-[500]">Shopping Cart</h1>
      <Breadcrumb>
-  <BreadcrumbList>
+  <BreadcrumbList>  
     <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+  <BreadcrumbLink href="/">Home</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>

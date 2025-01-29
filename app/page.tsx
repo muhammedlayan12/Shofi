@@ -9,10 +9,13 @@ import Testimonials from "./components/Testimonial";
 import BestSales from "./components/BestSales";
 import Service from "./components/Service";
 import Footer from "./components/Footer";
+ 
+
 // import App from "./components/App";
 
 
 function page() {
+ 
   return (
     <div>
       <Navbar></Navbar>

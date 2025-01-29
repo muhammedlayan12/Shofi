@@ -32,15 +32,7 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { Check, Instagram, Github, Linkedin, Facebook,X } from "lucide-react";
 
-type ProductData = {
-  image: any;
-  title: string;
-  category:string;
-  price: number;
-  id:number;
-  description:string;
-  discountedPrice: number;
-};
+
 
 function DetailPage() {
   const [isCartShow, setIsCartShow] = useState(false);
@@ -50,6 +42,17 @@ function DetailPage() {
   const [isQuantity, setIsQuantity] = useState(0);
   const params = useParams();
 
+
+  type ProductData = {
+    image: string;
+    price: number;
+    id:number;
+    stockStatus:string;
+    rating:number;
+    name:string;
+    description:string;
+    oldPrice: number;
+  };
 
  
   const increaseQuantity = () => {
@@ -76,9 +79,9 @@ if(isQuantity > 0){
 useEffect(() => {
     const fetchProduct = async () => {
       const query = `
-        *[_type=="productsData"]{
-  image,description,title,id,discountedPrice,price,category
-}
+    *[_type=="productsData"]{
+    id,name,image,price,oldPrice,description,rating,stockStatus
+  }
       `;
   
       try {
@@ -122,7 +125,7 @@ useEffect(() => {
     <div>
       <Navbar />
       {!product ? (
-          <div className="flex items-center justify-center h-screen bg-white">
+          <div className=" flex items-center justify-center h-screen bg-white">
           <div role="status" className="flex items-center">
             <svg
               aria-hidden="true"
@@ -144,10 +147,10 @@ useEffect(() => {
           </div>
         </div>
       ): (
-        <div>
-          <div className="mt-28 py-6 px-4 bg-[#ecffec]">
+        <div className="my-28 ">
+          <div className="mt-28 py-6 px-4   bg-[#ecffec]">
             <div className="sm:ml-[12%] ml-0">
-              <h1 className="text-[2em] font-[500]">{product.title}</h1>
+              <h1 className="text-[2em] font-[500]">{product.name}</h1>
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem>
@@ -159,7 +162,7 @@ useEffect(() => {
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
-                    <BreadcrumbPage>{product.title}</BreadcrumbPage>
+                    <BreadcrumbPage>{product.name}</BreadcrumbPage>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
@@ -168,21 +171,24 @@ useEffect(() => {
 
           <div
             key={product.id}
-            className="flex    sm:justify-evenly justify-center md:text-start text-center md:flex-row flex-col items-center"
+            className="flex py-28   sm:justify-evenly justify-center md:text-start text-center md:flex-row flex-col items-center"
           >
            
               <Image
               src={urlFor(product.image).url()}
               width={500}
               height={500}
-              alt={product.title}
+              alt={product.name}
               className="xl:w-[30%]"
           />
             <div className="flex     flex-col gap-2 px-2">
-              <span className="text-[#737373] text-[1em]">{product.title}</span>
+              <span className="text-[#737373] text-[1em]">{product.name}</span>
               <h1 className="sm:text-[2.1em] text-[1.5em] font-[500]">
-                {product.title}
+                {product.name}
               </h1>
+              <p className={`${product.stockStatus === "In Stock" ? "text-green-700" :"text-red-500"}  text-md`}>{product.stockStatus}</p>
+
+              <span className="text-[#111] text-[1em]">{`${product.rating} Rating`}</span>
               {/* <div
                 className={`${
                   product.stock === "In Stock"
@@ -200,7 +206,7 @@ useEffect(() => {
                   {`$${product.price.toFixed(2)}`}
                 </h2>
                 <span className="sm:text-xl text-sm line-through text-[#838383]">
-                  {`$${product.discountedPrice.toFixed(2)}`}
+                  {`$${product.oldPrice.toFixed(2)}`}
                 </span>
               </div>
 
@@ -212,7 +218,7 @@ useEffect(() => {
                   <span className="text-[1.5em] cursor-pointer" onClick={increaseQuantity} onClickCapture={limitToggler}>+</span>
                 </div>
                 <button
-                  onClick={() => cartToggler(product.title)}
+                  onClick={() => cartToggler(product.name)}
                   className="py-2 rounded-full px-12 text-[1em] bg-greenBase text-white"
                   
                 >
