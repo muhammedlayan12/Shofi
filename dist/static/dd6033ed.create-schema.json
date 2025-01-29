@@ -1,0 +1,48 @@
+[
+  {
+    "fields": [
+      {
+        "name": "id",
+        "type": "string",
+        "title": "Product ID"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "title": "Product Name"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "price",
+        "type": "number",
+        "title": "Original Price"
+      },
+      {
+        "name": "oldPrice",
+        "type": "number"
+      },
+      {
+        "name": "rating",
+        "type": "string"
+      },
+      {
+        "name": "stockStatus",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Product Image"
+      }
+    ],
+    "name": "productsData",
+    "type": "document",
+    "title": "ProductsData"
+  }
+]
