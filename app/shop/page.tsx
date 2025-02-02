@@ -265,6 +265,8 @@ function Shop() {
   };
 
 
+  
+
  
   useEffect(()=>{
     async function getData(){
@@ -297,6 +299,21 @@ function Shop() {
     return matchesSearch && matchesStatus ;
   });
 
+  const addToCart = (product: any) => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  
+    const productIndex = cart.findIndex((item: any) => item.name === product.name);
+  
+    if (productIndex > -1) {
+      cart[productIndex].quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+  
+    localStorage.setItem("cart", JSON.stringify(cart));
+    cartToggler(product.name);
+    };
+  
 
   type ProductData = {
     image: string;
@@ -353,7 +370,7 @@ function Shop() {
             key={data.id}
           >
             <div className="flex flex-col gap-3 absolute top-6 left-2 z-50 transition-all duration-500 opacity-0 transform -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
-            <ShoppingCart
+            {/* <ShoppingCart
 className="py-2 px-2 rounded-full transition-all duration-500 hover:bg-greenHover"
 size={40}
 onClickCapture={() => cartToggler(data.name)}
@@ -361,7 +378,15 @@ onClickCapture={() => cartToggler(data.name)}
 
 
 
+
+/> */}
+
+<ShoppingCart
+  className="py-2 px-2 rounded-full transition-all duration-500 hover:bg-greenHover"
+  size={40}
+  onClickCapture={() => addToCart(data)}
 />
+
 
               <Heart
                 className="py-2 px-2 bg-white rounded-full transition-all duration-500 hover:bg-greenHover"
@@ -409,7 +434,8 @@ onClickCapture={() => cartToggler(data.name)}
             </div>
 
       <Link href={`/products/${data.id}`}>
-      
+  
+  
       <Image
               src={urlFor(data.image).url()}   width={320} height={320}
               alt={data.name}

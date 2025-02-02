@@ -42,6 +42,21 @@ function DetailPage() {
   const [isQuantity, setIsQuantity] = useState(0);
   const params = useParams();
 
+  const addToCart = (product: any) => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  
+    const productIndex = cart.findIndex((item: any) => item.name === product.name);
+  
+    if (productIndex > -1) {
+      cart[productIndex].quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+  
+    localStorage.setItem("cart", JSON.stringify(cart));
+    cartToggler(product.name);
+    };
+  
 
   type ProductData = {
     image: string;
@@ -220,8 +235,10 @@ useEffect(() => {
                 <button
                   onClick={() => cartToggler(product.name)}
                   className="py-2 rounded-full px-12 text-[1em] bg-greenBase text-white"
-                  
-                >
+                  onClickCapture={() => addToCart(product)}>
+                 
+ 
+                   
                   Add To Cart
                 </button>
               </div>
