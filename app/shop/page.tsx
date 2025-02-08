@@ -267,6 +267,35 @@ function Shop() {
 
   
 
+  
+  const [wishItems, setWishItems] = useState<WishItem[]>([]);
+
+  const addToWish = (product:any) => {
+    setWishItems((prevWish:any) => {
+      const updatedWish = [...prevWish];
+      const productIndex = updatedWish.findIndex((item) => item.id === product.id);
+  
+      if (productIndex > -1) {
+        updatedWish[productIndex].quantity += 1;
+      } else {
+        updatedWish.push({ ...product, quantity: 1 });
+      }
+  
+  
+      localStorage.setItem("wish", JSON.stringify(updatedWish));
+  
+      return updatedWish;
+    });
+  };
+  
+  interface WishItem {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+    image: string;
+  }
+
  
   useEffect(()=>{
     async function getData(){
@@ -300,7 +329,7 @@ function Shop() {
   });
 
   const addToCart = (product: any) => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const cart = JSON.parse(localStorage.getItem("cartProducts") || "[]");
   
     const productIndex = cart.findIndex((item: any) => item.name === product.name);
   
@@ -310,7 +339,7 @@ function Shop() {
       cart.push({ ...product, quantity: 1 });
     }
   
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cartProducts", JSON.stringify(cart));
     cartToggler(product.name);
     };
   
@@ -391,7 +420,7 @@ onClickCapture={() => cartToggler(data.name)}
               <Heart
                 className="py-2 px-2 bg-white rounded-full transition-all duration-500 hover:bg-greenHover"
                 size={40}
-                onClick={() => wishToggler(data.name)}
+                onClick={() => {wishToggler(data.name),addToWish(data)}}
               />
               <Dialog>
                 <DialogTrigger> <Eye

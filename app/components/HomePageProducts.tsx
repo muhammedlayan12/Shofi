@@ -288,6 +288,71 @@ function Shop() {
     setTimeout(() => setIsWishShow(false), 3000);
   };
 
+  const addToCart = (product: any) => {
+    const cart = JSON.parse(localStorage.getItem("cartProducts") || "[]");
+  
+    const productIndex = cart.findIndex((item: any) => item.name === product.name);
+  
+    if (productIndex > -1) {
+      cart[productIndex].quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+  
+    localStorage.setItem("cartProducts", JSON.stringify(cart));
+    cartToggler(product.name);
+
+  };
+
+
+  const [wishItems, setWishItems] = useState<WishItem[]>([]);
+
+  const addToWish = (product:any) => {
+    setWishItems((prevWish:any) => {
+      const updatedWish = [...prevWish];
+      const productIndex = updatedWish.findIndex((item) => item.id === product.id);
+  
+      if (productIndex > -1) {
+        updatedWish[productIndex].quantity += 1;
+      } else {
+        updatedWish.push({ ...product, quantity: 1 });
+      }
+  
+  
+      localStorage.setItem("wish", JSON.stringify(updatedWish));
+  
+      return updatedWish;
+    });
+  };
+  
+  interface WishItem {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+    image: string;
+  }
+
+
+    // const addToWish = (product: any) => {
+    //   const wish = JSON.parse(localStorage.getItem("wish") || "[]");
+    
+    //   const productIndex = wish.findIndex((item: any) => item.name === product.name);
+    
+    //   if (productIndex > -1) {
+    //     wish[productIndex].quantity += 1;
+    //   } else {
+    //     wish.push({ ...product, quantity: 1 });
+    //   }
+    
+    //   localStorage.setItem("wish", JSON.stringify(wish));
+    //   cartToggler(product.name);
+    //   };
+
+      
+
+  
+
   return (
     <div>
   
@@ -300,7 +365,7 @@ function Shop() {
             key={data.id}
           >
             <div className="flex flex-col gap-3 absolute top-6 left-2 z-50 transition-all duration-500 opacity-0 transform -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
-            <ShoppingCart
+            {/* <ShoppingCart
 className="py-2 px-2 rounded-full transition-all duration-500 hover:bg-greenHover"
 size={40}
 onClickCapture={() => cartToggler(data.name)}
@@ -308,12 +373,18 @@ onClickCapture={() => cartToggler(data.name)}
 
 
 
-/>
+/> */}
 
+
+<ShoppingCart
+  className="py-2 px-2 rounded-full transition-all duration-500 hover:bg-greenHover"
+  size={40}
+  onClickCapture={() => addToCart(data)}
+/>
               <Heart
                 className="py-2 px-2 bg-white rounded-full transition-all duration-500 hover:bg-greenHover"
                 size={40}
-                onClick={() => wishToggler(data.name)}
+                onClick={() => {wishToggler(data.name) , addToWish(data)}}
               />
               <Dialog>
                 <DialogTrigger> <Eye

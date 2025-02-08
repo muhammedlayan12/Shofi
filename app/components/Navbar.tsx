@@ -5,13 +5,14 @@
 
 
  
-import { useState,  } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaChevronDown, FaHeart, FaSearch, FaShoppingBag, FaUser } from "react-icons/fa";
 import logo from "../../public/images/logo.svg";
 import cart1 from "../../public/images/examplecart1.webp";
 import cart2 from "../../public/images/examplecart2.webp";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,6 +37,51 @@ function Navbar() {
     setIsCartOpen(!isCartOpen);
   };
 
+  
+ 
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    useEffect(() => {
+      const savedCart = localStorage.getItem("cartProducts");
+      if (savedCart) {
+        setCartItems(JSON.parse(savedCart));
+      }
+    }, []);
+  
+       useEffect(() => {
+      if (cartItems.length > 0) {
+        localStorage.setItem("cartProducts", JSON.stringify(cartItems));
+      }
+    }, [cartItems]);
+  
+    
+    const removeItem = (id: string) => {
+      const updatedCart = cartItems.filter((item) => item.id !== id);
+      setCartItems(updatedCart);
+    };
+   
+    const updateQuantity = (id: string, newQuantity: number) => {
+      const updatedCart = cartItems.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      );
+      setCartItems(updatedCart);
+    };
+  
+    
+    // const totalPrice = cartItems.reduce(
+    //   (total, item) => total + item.price * item.quantity,
+    //   0
+    // );
+
+    console.log(cartItems)
+     
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+  
   return (
     <div>
       <nav
@@ -205,33 +251,31 @@ function Navbar() {
           onClick={toggleCart}
         ></div>
  <div className={`${isCartOpen ? "translate-x-0" : "translate-x-full"} fixed bg-white h-full top-0 right-0 transition-all duration-500 bottom-0 z-50 sm:w-[300px] w-[80%]`}>
-<div className="absolute top-4 left-4 text-lg cursor-pointer">Shopping Cart</div>
+      <div className="absolute top-4 left-4 text-lg cursor-pointer">Shopping Cart</div>
 <div className="absolute top-4 right-4 text-xl font-extralight cursor-pointer" onClick={toggleCart}>&#x2716;</div>
-  <ul className="flex flex-col absolute top-24 justify-center">
+  <ul className="flex flex-col absolute top-24 gap-10 justify-center">
+{
+  cartItems.map((items:any)=>(
     
     <li className="flex items-center gap-3 px-2">
-      <Image src={cart1} alt="product" width={85}/>
+      <Image src={urlFor(items.image).url()} alt="product" width={85} height={85}/>
       <div className="flex flex-col">
-        <h2 className="sm:text-[0.9em] text-[0.75em] flex gap-4">Raw Meat on White <button>&#x2716;</button></h2>
-        <span className="text-greenBase text-sm">$190.00 <span className="text-xs text-[#737373]">x1</span></span>
+        <h2 className="sm:text-[0.9em] text-[0.75em] flex gap-4">{items.name} <button  onClick={()=>{removeItem(items.id)}}>&#x2716;</button></h2>
+        <span className="text-greenBase text-sm">{`$${items.price}`} <span className="text-xs text-[#737373]">{`x${items.quantity}`}</span></span>
       </div>
     </li>
 
-    <li className="flex items-center gap-3 px-2">
-      <Image src={cart2} alt="product" width={85}/>
-      <div className="flex flex-col">
-        <h2 className="sm:text-[0.9em] text-[0.75em] flex gap-4">Fresh Oranges Best Quality imported<button>&#x2716;</button></h2>
-        <span className="text-greenBase text-sm">$220.00 <span className="text-xs text-[#737373]">x4</span></span>
-      </div>
-    </li>
+    
 
+  ))}
   </ul>
-
   <div className="absolute top-[65%] flex flex-col gap-5 justify-center text-center w-[90%] py-2 px-2">
     <p className="flex justify-between">Subtotal: <span>$410.00</span></p>
     <Link className="py-3 rounded-full bg-greenBase text-white transition-all duration-500 hover:bg-greenHover" href="/cart">View Cart</Link>
     <Link className="py-3 rounded-full bg-greenBase text-white transition-all duration-500 hover:bg-greenHover" href="/checkout">Checkout</Link>
-  </div>
+ 
+   </div>
+ 
 </div>
 
 
@@ -243,4 +287,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
