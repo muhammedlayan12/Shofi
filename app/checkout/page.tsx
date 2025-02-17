@@ -1,13 +1,14 @@
 
 "use client";
-
-// import Header from "../components/Header";
+ 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import {Trash} from "lucide-react";
+import { useRouter } from "next/navigation";
+import CheckoutButton from "@/app/components/checkoutButton"; 
 
 
 import {
@@ -18,69 +19,10 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb";
+  import {loadStripe} from "@stripe/stripe-js"
 
-// function CheckoutPage() {
-//   const [checkoutItems, setCheckoutItems] = useState([]);
-//   const [totalPrice, setTotalPrice] = useState(0);
-//   const [formDetails, setFormDetails] = useState({
-//     firstName: "",
-//     lastName: "",
-//     addressLine1: "",
-//     addressLine2: "",
-//     postalCode: "",
-//     locality: "",
-//     state: "",
-//     email: "",
-//     phoneNumber: "",
-//     pan: "",
-//   });
 
-//   useEffect(() => {
-//     const storedItems = localStorage.getItem("checkoutCart");
-//     if (storedItems) {
-//       setCheckoutItems(JSON.parse(storedItems));
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     const total = checkoutItems.reduce(
-//       (sum: any, item: any) => sum + item.price * item.quantity,
-//       0
-//     );
-//     setTotalPrice(total);
-//   }, [checkoutItems]);
-
-//   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-//     const { name, value } = e.target;
-//     setFormDetails((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-    
- 
-//     const orderDetails = {
-//       ...formDetails,
-//       items: checkoutItems,
-//       totalPrice: totalPrice,
-//     };
-
-//     const handleRemoveItem = (indexToRemove: number) => {
-//         const updatedItems = checkoutItems.filter((_, index) => index !== indexToRemove);
-//         setCheckoutItems(updatedItems);
-//         localStorage.setItem("checkoutCart", JSON.stringify(updatedItems));
-//       };
-      
-      
-     
-//     const existingOrders = JSON.parse(localStorage.getItem("shippedOrder") || "[]");
-//     existingOrders.push(orderDetails);
-//     localStorage.setItem("shippedOrder", JSON.stringify(existingOrders));
-
-//     localStorage.removeItem("checkoutCart");   
-
-//     alert("Order placed successfully!");
-//   };
+  
 
 function CheckoutPage() {
     const [formDetails, setFormDetails] = useState({
@@ -88,6 +30,7 @@ function CheckoutPage() {
         lastName: "",
         addressLine1: "",
         addressLine2: "",
+        paymentMethod:"",
         postalCode: "",
         locality: "",
         state: "",
@@ -113,6 +56,7 @@ function CheckoutPage() {
       setTotalPrice(total);
     }, [checkoutItems]);
   
+    
    
     const handleRemoveItem = (indexToRemove: number) => {
       const updatedItems = checkoutItems.filter((_, index) => index !== indexToRemove);
@@ -124,22 +68,39 @@ function CheckoutPage() {
         const { name, value } = e.target;
         setFormDetails((prev) => ({ ...prev, [name]: value }));
       };
+ 
+ 
+    const router = useRouter(); 
+ 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      
+    
+      if (!formDetails.paymentMethod) {
+        alert("Please select a payment method.");
+        return;
+      }
+    
       const orderDetails = {
         items: checkoutItems,
         totalPrice: totalPrice,
       };
-  
+    
       const existingOrders = JSON.parse(localStorage.getItem("shippedOrder") || "[]");
       existingOrders.push(orderDetails);
       localStorage.setItem("shippedOrder", JSON.stringify(existingOrders));
-  
+    
       localStorage.removeItem("checkoutCart");   
+    
       alert("Order placed successfully!");
+    
+      
+      if (formDetails.paymentMethod === "COD") {
+        router.push("/codpaymentthanku");
+      }
     };
-  
+    
+
+    
   return (
     <div className="bg-gray-100 min-h-screen font-poppins">
       {/* <Header /> */}
@@ -267,12 +228,31 @@ function CheckoutPage() {
                 className="input w-full mb-4"
               />
 
+
+<div className="mb-4">
+                
+<select
+  name="paymentMethod"  
+  value={formDetails.paymentMethod}
+  onChange={handleFormChange}
+  className="input w-full mb-4"
+>
+  <option value="">Select Payment Method</option>
+  <option value="COD">Cash On Delivery</option>
+  <option value="Stripe">Stripe</option>
+</select>
+
+              </div>
+              
               <button
-                type="submit"
-                className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800"
-              >
-                Place Order
-              </button>
+  type="submit"
+  className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800"
+ 
+ 
+>
+
+  Place Order
+</button>
             </form>
           </div>
 
@@ -305,6 +285,7 @@ function CheckoutPage() {
   />
 </div>
 
+<CheckoutButton checkoutItems={checkoutItems}></CheckoutButton>
 
                     </div>
                     
@@ -334,7 +315,6 @@ function CheckoutPage() {
 }
 
 export default CheckoutPage;
-
 
 
 
